@@ -11,9 +11,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-from decouple import config
 import os
+from decouple import config
 from dotenv import load_dotenv
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -104,27 +105,44 @@ WSGI_APPLICATION = 'api.wsgi.app'
 #     }
 # }
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": DATABASE_NAME,
-        #    '‘rpalm_db’'
-        "USER": DATABASE_USER,
-        "PASSWORD": DATABASE_PASSWORD,
-        "HOST": DATABASE_HOST,
-        "PORT": DATABASE_PORT,
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": DATABASE_NAME,
+#         #    '‘rpalm_db’'
+#         "USER": DATABASE_USER,
+#         "PASSWORD": DATABASE_PASSWORD,
+#         "HOST": DATABASE_HOST,
+#         "PORT": DATABASE_PORT,
+#     }
+# }
 
-DATABASE_URL = config("DATABASE_URL", cast=str, default="")
-if DATABASE_URL != "":
-    import dj_database_url
+# DATABASE_URL = config("DATABASE_URL", cast=str, default="")
+# if DATABASE_URL != "":
+#     import dj_database_url
+#     DATABASES = {
+#         "default": dj_database_url.config(
+#             default=DATABASE_URL,
+#             conn_max_age=300,
+#             conn_health_checks=True
+#         )
+#     }
+
+DATABASE_URL = os.environ.get('DATABASE_URL')
+if DATABASE_URL:
     DATABASES = {
-        "default": dj_database_url.config(
-            default=DATABASE_URL,
-            conn_max_age=300,
-            conn_health_checks=True
-        )
+        'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get('DATABASE_NAME'),
+            'USER': os.environ.get('DATABASE_USER'),
+            'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+            'HOST': os.environ.get('DATABASE_HOST'),
+            'PORT': os.environ.get('DATABASE_PORT'),
+        }
     }
 
 
