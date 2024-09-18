@@ -23,11 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / '.env')
 
 # Get environment variables
-DATABASE_NAME = os.getenv('DATABASE_NAME')
-DATABASE_USER = os.getenv('DATABASE_USER')
-DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')
-DATABASE_HOST = os.getenv('DATABASE_HOST')
-DATABASE_PORT = os.getenv('DATABASE_PORT')
+# DATABASE_NAME = os.getenv('DATABASE_NAME')
+# DATABASE_USER = os.getenv('DATABASE_USER')
+# DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')
+# DATABASE_HOST = os.getenv('DATABASE_HOST')
+# DATABASE_PORT = os.getenv('DATABASE_PORT')
 
 # Get with a default value if not set
 # value = os.environ.get('VARIABLE_NAME', 'default_value')
