@@ -109,18 +109,6 @@ WSGI_APPLICATION = 'api.wsgi.app'
 #     }
 # }
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": DATABASE_NAME,
-#         #    '‘rpalm_db’'
-#         "USER": DATABASE_USER,
-#         "PASSWORD": DATABASE_PASSWORD,
-#         "HOST": DATABASE_HOST,
-#         "PORT": DATABASE_PORT,
-#     }
-# }
-
 # DATABASE_URL = config("DATABASE_URL", cast=str, default="")
 # if DATABASE_URL != "":
 #     import dj_database_url
